@@ -7,5 +7,9 @@
 #
 
 config = {
-
+    'user': 'user',
+    'password': 'password',
+    'host': 'IP',
+    'port': 'port',
+    'database': 'db_name'
 }
