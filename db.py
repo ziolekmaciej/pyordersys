@@ -5,6 +5,7 @@
 #  Created by Maciej Ziółkowski on 09.01.2019.
 #  db connection
 #
+
 import mysql.connector
 from config_db import config
 

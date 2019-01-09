@@ -5,6 +5,7 @@
 #  Created by Maciej Ziółkowski on 09.01.2019.
 #  running script
 #
+
 from session import Session
 
 
