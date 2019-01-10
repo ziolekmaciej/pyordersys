@@ -11,5 +11,6 @@ from session import Session
 if __name__ == "__main__":
     session = Session()
     session.start()
+    session.sign_in()
     session.show_rows()
 
