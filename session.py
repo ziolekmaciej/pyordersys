@@ -25,7 +25,6 @@ class Session:
 
     def sign_in(self):
         login = input('Login: ').lower()
-        print(login)
         self.log.write(pref['log'], sess['log_tr'] + login)
         password = getpass.getpass('Password: ')
         if self.connected_db():
@@ -33,9 +32,9 @@ class Session:
             self.cursor.execute(query, (login, password))
             result = self.cursor.fetchone()
             if result is not None:
-                self.name = login.capitalize()
+                self.name = login
                 self.id, self.group = result
-                self.log.write(pref['log'], self.name + sess['log_ok'] + self.group)
+                self.log.write(pref['log'], self.name.capitalize() + sess['log_ok'] + self.group)
                 print(sess['ap_wl'] + self.name + sess['ap_an'])
             else:
                 self.log.write(pref['war'], sess['log_er'] + login)
@@ -63,10 +62,11 @@ class Session:
     def show_rows(self):
         if self.connected_db():
             self.log.write(pref['log'], sess['db_do'])
-            query = "SELECT * FROM users WHERE login = %s"
-            self.cursor.execute(query,(self.name.lower(),))
+            query = "SELECT phone FROM users WHERE login = %s"
+            self.cursor.execute(query,(self.name,))
             for data in self.cursor:
-                print(data)
+                for x in data:
+                    print(x)
         else:
             self.log.write(pref['war'], sess['db_no'])
 

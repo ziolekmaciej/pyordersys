@@ -23,7 +23,7 @@ sess = {
 }
 
 pref = {
-    'log': '[LOG]:',
-    'err': '[ERR]:',
-    'war': '[WRN]:'
+    'log': '[LOG] ',
+    'err': '[ERR] ',
+    'war': '[WRN] '
 }
