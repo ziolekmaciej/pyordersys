@@ -7,35 +7,46 @@
 #
 
 from db import DataBase
-
+from log import Log
+from messages import pref, sess
 
 class Session:
     def __init__(self):
         self.db = DataBase()
+        self.log = Log()
         self.connection = 0
         self.cursor = None
 
     def start(self):
         self.connection = self.db.connect()
-        if self.connection == 1:
+        if self.connected_db():
             self.cursor = self.db.connection.cursor()
-            print("Connected to db")
+            self.log.write(pref['log'], sess['db_ok'])
         else:
-            print("Error with db, error number = ", self.connection)
+            self.log.write(pref['err'], sess['db_er'] + str(self.connection))
+
+    def connected_db(self):
+        return self.connection == 1
 
     def end(self):
-        if self.connection == 1:
+        if self.connected_db():
             self.cursor = None
             self.db.disconnect()
-            print("Disconnected from db")
+            self.log.write(pref['log'], sess['db_dc'])
         else:
-            print("I was not connected to db")
+            self.log.write(pref['war'], sess['db_no'])
 
     def show_rows(self):
-        query = "SELECT * FROM users"
-        self.cursor.execute(query)
-        for data in self.cursor:
-            print(data[0:2])
+        if self.connected_db():
+            self.log.write(pref['log'], sess['db_do'])
+            query = "SELECT * FROM users"
+            self.cursor.execute(query)
+            for data in self.cursor:
+                for cell in data:
+                    print(cell , end=' ')
+                print()
+        else:
+            self.log.write(pref['war'], sess['db_no'])
 
 
 

@@ -12,5 +12,4 @@ if __name__ == "__main__":
     session = Session()
     session.start()
     session.show_rows()
-    session.end()
 
