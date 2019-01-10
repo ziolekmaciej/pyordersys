@@ -23,11 +23,6 @@ class Session:
         self.id = None
         self.group = None
 
-    def __del__(self):
-        if self.connected_db():
-            self.db.disconnect()
-            self.log.write(pref['log'], sess['db_dc'])
-
     def sign_in(self):
         login = input('Login: ').lower()
         print(login)
@@ -74,7 +69,5 @@ class Session:
                 print(data)
         else:
             self.log.write(pref['war'], sess['db_no'])
-
-
 
 

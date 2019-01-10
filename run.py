@@ -13,4 +13,5 @@ if __name__ == "__main__":
     session.start()
     session.sign_in()
     session.show_rows()
+    session.end()
 

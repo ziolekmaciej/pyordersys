@@ -17,23 +17,21 @@ def log_file_path():
 
 
 def get_time():
-    return datetime.datetime.now().strftime('%H:%M') + ' '
+    return datetime.datetime.now().strftime('%H:%M:%S') + ' '
 
 
 class Log:
     def __init__(self):
-        self.logfile = open(log_file_path(), 'w')
-        self.logfile.write('<---  STARTING LOGGING  --->' + '\n')
-
-    def __del__(self):
-        if not self.logfile.closed:
-            self.end()
-
-    def end(self):
+        self.file_name = log_file_path()
+        self.logfile = open(self.file_name, 'w')
+        self.logfile.write('ORDERING SYSTEM BY MACIEJ ZIÓŁKOWSKI' + '\n\n')
+        self.logfile.write('<-------  STARTING LOGGING  ------->' + '\n')
         self.logfile.close()
 
     def write(self, prefix, message):
+        self.logfile = open(self.file_name, 'a')
         self.logfile.write(prefix + get_time() + message + '\n')
+        self.logfile.close()
 
 
 
